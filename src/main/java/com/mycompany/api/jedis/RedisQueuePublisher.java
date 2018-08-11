@@ -11,7 +11,7 @@ public class RedisQueuePublisher implements AutoCloseable
 		this.jedisPool = new JedisPoolFactory(cfg).getJedisPool();
 	}
 	
-	public void publish(String queueName, String value)
+	public void addToQueue(String queueName, String value)
 	{
 		jedisPool.getResource().rpush(queueName, value);
 	}
