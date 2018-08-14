@@ -1,5 +1,7 @@
 package com.mycompany.sdk.redis;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -10,6 +12,8 @@ import org.springframework.stereotype.Service;
 @Service
 public abstract class AbstractRedisQueue implements RedisQueue
 {
+
+	private final Logger log = LoggerFactory.getLogger(this.getClass());
 
 	@Autowired
 	private JedisConnectionFactory jedisConnectionFactory;
@@ -33,6 +37,7 @@ public abstract class AbstractRedisQueue implements RedisQueue
 	public void publish(String message)
 	{
 		getRedisTemplate().convertAndSend(getChannelTopic().getTopic(), message);
+		log.info("Message pushed to the queue " + this.getClass().getName());
 	}
 
 }
