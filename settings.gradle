@@ -1,0 +1,2 @@
+rootProject.name = 'sdk_redis'
+enableFeaturePreview('STABLE_PUBLISHING')
